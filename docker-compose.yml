@@ -1,0 +1,104 @@
+version: '3.8'
+
+services:
+  nginx-proxy:
+    build:
+      context: ./build/nginx
+      dockerfile: Dockerfile
+    image: tickets:nginx-${IMAGE_ENVIROMENT}
+    container_name: capa-nginx
+    restart: unless-stopped
+    tty: true
+    depends_on:
+      - laravel-echo-server
+      - php
+    ports:
+      - "80:80"
+    volumes:
+      - ./src:/var/www/html
+      - ./build/nginx/vhost/:/etc/nginx/vhost.d/
+      - ./build/nginx/conf.d/:/etc/nginx/conf.d/
+
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: tickets:php-${IMAGE_ENVIROMENT}
+    container_name: capa-php
+    restart: unless-stopped
+    volumes:
+      - ./src:/var/www/html
+    environment:
+      PHP_OPCACHE_ENABLE: ${PHP_OPCACHE_ENABLE}
+      PHP_OPCACHE_MAX_ACCELERATED_FILES: ${PHP_OPCACHE_MAX_ACCELERATED_FILES}   # "0" para desarrollo, 1 para produccion
+      PHP_OPCACHE_MEMORY_CONSUMPTION: ${PHP_OPCACHE_MEMORY_CONSUMPTION}   # "0" para desarrollo, 1 para produccion
+      PHP_OPCACHE_MAX_WASTED_PERCENTAGE: ${PHP_OPCACHE_MAX_WASTED_PERCENTAGE}   # "0" para desarrollo, 1 para produccion
+
+  supervisor:
+    build:
+      context: .
+      dockerfile: Dockerfile-supervisor
+    image: tickets:supervisor-${IMAGE_ENVIROMENT}
+    container_name: capa-supervisor
+    depends_on:
+      - php
+    restart: unless-stopped
+    volumes:
+      - ./build/supervisor:/etc/supervisor/conf.d
+      - ./src:/var/www/html
+    environment:
+      PHP_OPCACHE_ENABLE: ${PHP_OPCACHE_ENABLE}  # "0" para desarrollo, 1 para produccion
+      PHP_OPCACHE_MAX_ACCELERATED_FILES: ${PHP_OPCACHE_MAX_ACCELERATED_FILES}   # "0" para desarrollo, 1 para produccion
+      PHP_OPCACHE_MEMORY_CONSUMPTION: ${PHP_OPCACHE_MEMORY_CONSUMPTION}   # "0" para desarrollo, 1 para produccion
+      PHP_OPCACHE_MAX_WASTED_PERCENTAGE: ${PHP_OPCACHE_MAX_WASTED_PERCENTAGE}   # "0" para desarrollo, 1 para produccion
+
+  laravel-echo-server:
+    build:
+      context: ./build/laravel-echo
+      dockerfile: Dockerfile
+    image: tickets:echo-${IMAGE_ENVIROMENT}
+    container_name: capa-echo
+    expose:
+      - "6001"
+    environment:
+      ECHO_BUILD_ENVIROMENT: ${ECHO_BUILD_ENVIROMENT}
+
+  mysql:
+    image: mysql:5.7.29
+    container_name: capa-mysql
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: 'capa'
+      MYSQL_USER: 'capa'
+      MYSQL_PASSWORD: '9Y8qgr8hufA2R8Erl'
+      MYSQL_ROOT_PASSWORD: 'root'
+
+  npm:
+    image: node:14-alpine
+    container_name: capa-npm
+    volumes:
+      - ./src:/var/www/html
+    working_dir: /var/www/html
+    entrypoint: ['npm']
+
+  composer:
+    image: composer:1.10
+    container_name: capa-composer
+    volumes:
+      - ./src:/var/www/html
+    working_dir: /var/www/html
+    environment:
+      COMPOSER_MEMORY_LIMIT: -1
+    entrypoint: ['composer'] #'--ignore-platform-reqs'
+
+#  redis_gui:
+#    image: marian/rebrow
+#    container_name: redis_gui
+#    restart: unless-stopped
+#    ports:
+#      - "5001:5001"
+#    networks:
+#      - form_builder

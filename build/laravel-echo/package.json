@@ -1,0 +1,11 @@
+{
+    "private": true,
+    "scripts": {
+        "local": "laravel-echo-server start",
+        "production": "laravel-echo-server start --dir=/usr/src/app/prod/",
+        "testing": "laravel-echo-server start --dir=/usr/src/app/testing/"
+    },
+    "dependencies": {
+        "laravel-echo-server": "^1.6.2"
+    }
+}

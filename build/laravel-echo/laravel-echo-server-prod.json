@@ -1,0 +1,32 @@
+{
+	"authHost": "http://nginx-proxy",
+	"authEndpoint": "/broadcasting/auth",
+	"database": "redis",
+	"databaseConfig": {
+		"redis": {
+			"keyPrefix": "tickets_production_",
+			"port": "6379",
+			"host": "host AWS"
+		}
+	},
+	"devMode": false,
+	"host": "laravel-echo-server",
+	"port": "6001",
+	"protocol": "http",
+	"socketio": {},
+	"secureOptions": 67108864,
+	"sslCertPath": "",
+	"sslKeyPath": "",
+	"sslCertChainPath": "",
+	"sslPassphrase": "",
+	"subscribers": {
+		"http": true,
+		"redis": true
+	},
+	"apiOriginAllow": {
+		"allowCors": false,
+		"allowOrigin": "",
+		"allowMethods": "",
+		"allowHeaders": ""
+	}
+}
