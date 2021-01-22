@@ -19,9 +19,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
+Route::get('/home', 'HomeController@index')->name('home')->middleware('role:admin');
 Route::resource('users','UserController');
-
 Route::resource('roles','RoleController');
 Route::post('users/attach','RoleController@attachRole')->name('users.attachrole');
+
