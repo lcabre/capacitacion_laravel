@@ -45,4 +45,14 @@ class User extends Authenticatable
     public function checkRole($roles){
         return $this->roles()->whereIn('slug', $roles)->count();
     }
+
+    public function dg(){
+        return $this->belongsTo(Dg::class, 'dg_id');
+    }
+    public function proyecto(){
+        return $this->belongsToMany(Proyecto::class, 'user_proyecto','user_id', 'proyecto_id');
+    }
+    public function perfil(){
+        return $this->hasOne(Perfil::class);
+    }
 }
