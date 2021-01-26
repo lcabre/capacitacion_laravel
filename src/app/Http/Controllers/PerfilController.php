@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Perfil;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class PerfilController extends Controller
 {
@@ -14,7 +15,8 @@ class PerfilController extends Controller
      */
     public function index()
     {
-        return view();
+        $perfiles = Perfil::paginate(5);
+        return view('pages.perfiles.index', compact('perfiles'));
     }
 
     /**
@@ -24,7 +26,7 @@ class PerfilController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.perfiles.create');
     }
 
     /**
@@ -35,7 +37,24 @@ class PerfilController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'nombre' => 'required|string|max:255',
+            'apellido' => 'required|string|max:255'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()
+                ->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $perfil = new Perfil();
+        $perfil->nombre = $request->nombre;
+        $perfil->apellido = $request->apellido;
+        $perfil->save();
+
+        return redirect()->route('perfil.index');
     }
 
     /**
@@ -71,7 +90,24 @@ class PerfilController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd($request->all());
+        $validator = Validator::make($request->all(), [
+            'nombre' => 'required',
+            'apellido' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()
+                ->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $perfil = Perfil::find($id);
+        $perfil->nombre = $request->nombre;
+        $perfil->apellido = $request->apellido;
+        $perfil->save();
+
+        return redirect()->route('perfil.show', $id);
     }
 
     /**

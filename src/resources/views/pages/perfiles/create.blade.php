@@ -5,24 +5,23 @@
         <div class="row justify-content-center">
             <div class="col-md-4">
                 <div class="container-sm">
-                    <form action="{{ route('perfil.update', $perfil->id)}}" method="post">
+                    <form action="{{ route('perfil.store')}}" method="post">
                         @csrf
-                        @method('PUT')
                         <div class="form-group">
                             <label for="nombre">Nombre</label>
-                            <input name="nombre" type="text" class="form-control @error('nombre') is-invalid @enderror" id="nombre" value="{{$perfil->nombre}}">
+                            <input name="nombre" type="text" class="form-control @error('nombre') is-invalid @enderror" id="nombre" placeholder="Jane">
                             @error('nombre')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-group">
                             <label for="apellido">Apellido</label>
-                            <input name="apellido" type="text" class="form-control @error('apellido') is-invalid @enderror" id="apellido" value="{{$perfil->apellido}}">
+                            <input name="apellido" type="text" class="form-control @error('apellido') is-invalid @enderror" id="apellido" placeholder="Doe" ">
                             @error('apellido')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>
-                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        <button type="submit" class="btn btn-primary">Crear</button>
                     </form>
                 </div>
             </div>

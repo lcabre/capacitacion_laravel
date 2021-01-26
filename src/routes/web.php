@@ -19,8 +19,12 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/perfil/{id}', 'PerfilController@show');
-Route::get('/perfil/{id}/edit', 'PerfilController@edit');
+//PERFILES
+Route::get('/perfiles', 'PerfilController@index')->name('perfil.index');
+Route::get('/perfil/create','PerfilController@create')->name('perfil.create');
+Route::post('/perfil', 'PerfilController@store')->name('perfil.store');
+Route::get('/perfil/{id}', 'PerfilController@show')->name('perfil.show');
+Route::get('/perfil/{id}/edit', 'PerfilController@edit')->name('perfil.edit');
 Route::put('/perfil/{id}','PerfilController@update')->name('perfil.update');
 
 

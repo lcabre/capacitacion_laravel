@@ -5,16 +5,17 @@
         <div class="row justify-content-center">
             <div class="col-md-4">
                 <div class="container-sm">
-                    <form method="post">
+                    <form action="{{route('perfil.edit', $perfil->id)}}">
                         @csrf
-                        <input type="hidden" name="user_id" value="{{ $perfil->id }}">
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="{{$perfil->nombre}}" disabled>
+                        <div class="form-group">
+                            <label for="nombre">Nombre</label>
+                            <input name="nombre" type="text" class="form-control" id="nombre" value="{{$perfil->nombre}}" disabled>
                         </div>
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="{{$perfil->apellido}}" disabled>
+                        <div class="form-group">
+                            <label for="apellido">Apellido</label>
+                            <input name="apellido" type="text" class="form-control" id="apellido" value="{{$perfil->apellido}}" disabled>
                         </div>
-                        <button type="button" class="btn btn-outline-primary">Editar</button>
+                        <a href="{{route('perfil.edit', $perfil->id)}}" class="btn btn-primary" role="button">Editar</a>
                     </form>
                 </div>
             </div>
