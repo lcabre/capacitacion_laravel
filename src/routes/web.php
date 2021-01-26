@@ -19,8 +19,13 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home')->middleware('role:admin');
-Route::resource('users','UserController');
-Route::resource('roles','RoleController');
-Route::post('users/attach','RoleController@attachRole')->name('users.attachrole');
+Route::get('/perfil/{id}', 'PerfilController@show');
+Route::get('/perfil/{id}/edit', 'PerfilController@edit');
+Route::put('/perfil/{id}','PerfilController@update')->name('perfil.update');
+
+
+
+//Route::get('/home', 'HomeController@index')->name('home');#->middleware('role:admin')
+//Route::resource('roles','RoleController');
+//Route::post('users/attach','RoleController@attachRole')->name('users.attachrole');
 
