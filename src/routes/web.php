@@ -27,6 +27,16 @@ Route::get('/perfil/{id}', 'PerfilController@show')->name('perfil.show');
 Route::get('/perfil/{id}/edit', 'PerfilController@edit')->name('perfil.edit');
 Route::put('/perfil/{id}','PerfilController@update')->name('perfil.update');
 
+//Proyectos
+Route::get('/proyectos', 'ProyectosController@index')->name('proyectos.index');
+Route::get('/proyectos/create', 'ProyectosController@create')->name('proyectos.create');
+Route::post('/proyectos', 'ProyectosController@store')->name('proyectos.store');
+Route::get('/proyectos/{id}', 'ProyectosController@show')->name('proyectos.show');
+Route::get('/proyectos/{id}/edit', 'ProyectosController@edit')->name('proyectos.edit');
+Route::put('/perfil/{id}', 'ProyectosController@update')->name('proyectos.update');
+Route::delete('/perfil/{id}', 'ProyectosController@delete')->name('proyectos.delete');
+
+
 
 
 //Route::get('/home', 'HomeController@index')->name('home');#->middleware('role:admin')
