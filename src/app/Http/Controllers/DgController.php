@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dg;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class DgController extends Controller
 {
@@ -13,7 +15,8 @@ class DgController extends Controller
      */
     public function index()
     {
-        //
+        $dgs = Dg::paginate(5);
+        return view('pages.dgs.index', compact('dgs'));
     }
 
     /**
@@ -23,7 +26,7 @@ class DgController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.dgs.create');
     }
 
     /**
@@ -34,7 +37,22 @@ class DgController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'nombre' => 'required|string|max:255',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()
+                ->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $dg = new Dg();
+        $dg->nombre = $request->nombre;
+        $dg->save();
+
+        return redirect()->route('dg.index');
     }
 
     /**
@@ -45,7 +63,8 @@ class DgController extends Controller
      */
     public function show($id)
     {
-        //
+        $dg = Dg::findOrFail($id);
+        return view('pages.dgs.show', compact('dg'));
     }
 
     /**
@@ -56,7 +75,8 @@ class DgController extends Controller
      */
     public function edit($id)
     {
-        //
+        $dg = Dg::findOrFail($id);
+        return view('pages.dgs.edit', compact('dg'));
     }
 
     /**
@@ -68,7 +88,22 @@ class DgController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'nombre' => 'required|string|max:255',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()
+                ->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $dg = DG::find($id);
+        $dg->nombre = $request->nombre;
+        $dg->save();
+
+        return redirect()->route('dg.index');
     }
 
     /**

@@ -23,13 +23,13 @@
                         </div>
                         <div class="form-group">
                             <label for="integrantes">Integrantes</label>
-                            <select multiple class="form-control @error('role_id') is-invalid @enderror" name="integrantes[]" aria-label="Integrantes">
+                            <select multiple class="form-control @error('integrantes[]') is-invalid @enderror" name="integrantes[]" aria-label="Integrantes">
                                 <option value="">Seleccione una opcion</option>
                                 @foreach($usuarios as $usuario)
                                     <option value="{{$usuario->id}}">{{$usuario->name}}</option>
                                 @endforeach
                             </select>
-                            @error('fecha_entrega')
+                            @error('integrantes[]')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>

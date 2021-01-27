@@ -5,8 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-4">
                 <div class="container-sm">
-                    <form action="{{route('perfil.edit', $perfil->id)}}">
-                        @csrf
+                    <form>
                         <div class="form-group">
                             <label for="nombre">Nombre</label>
                             <input name="nombre" type="text" class="form-control" id="nombre" value="{{$perfil->nombre}}" disabled>

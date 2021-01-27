@@ -33,7 +33,15 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                        <li class="nav-item">
+                            <a class="nav-link {{Request::is('proyectos') ? 'active' : ''}}" href="{{route('proyectos.index')}}">Proyectos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{Request::is('dgs') ? 'active' : ''}}" href="{{route('dg.index')}}">Direcciones Generales</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{Request::is('perfiles') ? 'active' : ''}}" href="{{route('perfil.index')}}">Perfiles</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

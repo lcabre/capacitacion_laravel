@@ -32,8 +32,6 @@
                                     <a href="#" class="btn btn-outline-danger btn-sm">Eliminar</a>
                                 </div>
                             </td>
-                            <td></td>
-
                         </tr>
                     @endforeach
                     </tbody>

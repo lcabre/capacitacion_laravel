@@ -4,26 +4,25 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <a href="{{route('perfil.create')}}" class="btn btn-primary" role="button">Crear nuevo Perfil</a>
+                <a href="{{route('dg.create')}}" class="btn btn-primary" role="button">Crear nueva DG</a>
                 <br>
                 <table class="table table-striped"><thead>
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Nombre</th>
-                        <th scope="col">Apellido</th>
                         <th scope="col"></th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($perfiles as $perfil)
+
+                    @foreach($dgs as $dg)
                         <tr>
-                            <th scope="row">{{$perfil->id}}</th>
-                            <td>{{$perfil->nombre}}</td>
-                            <td>{{$perfil->apellido}}</td>
+                            <td>{{$dg->id}}</td>
+                            <td>{{$dg->nombre}}</td>
                             <td>
                                 <div class="btn-group">
-                                    <a href="{{route('perfil.edit', $perfil->id)}}" class="btn btn-outline-primary btn-sm">Editar</a>
-                                    <a href="{{route('perfil.show', $perfil->id)}}" class="btn btn-outline-info btn-sm">Info</a>
+                                    <a href="{{route('dg.edit', $dg->id)}}" class="btn btn-outline-primary btn-sm">Editar</a>
+                                    <a href="{{route('dg.show', $dg->id)}}" class="btn btn-outline-info btn-sm">Info</a>
                                     <a href="#" class="btn btn-outline-danger btn-sm">Eliminar</a>
                                 </div>
                             </td>
@@ -31,12 +30,7 @@
                     @endforeach
                     </tbody>
                 </table>
-
-
-
-{{--                {{ $perfiles->links() }} PAGINACION--}}
-
-
+                {{$dgs->links()}}
             </div>
         </div>
     </div>
