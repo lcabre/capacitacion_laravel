@@ -4,6 +4,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-4">
+                <h3 class="text-center">Editar Perfil</h3>
                 <div class="container-sm">
                     <form action="{{ route('perfil.update', $perfil->id)}}" method="post">
                         @csrf

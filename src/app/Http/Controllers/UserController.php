@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dg;
 use App\Models\Role;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -69,7 +71,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::findOrFail($id);
+        $dgs = Dg::all();
+        return view ('pages.users.edit', compact('user', 'dgs'));
     }
 
     /**
@@ -81,7 +85,27 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'email' => 'required|email:filter',
+            'dg_id' => 'required|numeric|exists:dgs,id'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()
+                ->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $dg = Dg::find($request->dg_id);
+        $user = User::find($id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->dg()->associate($dg); //Cuando es 1 a N, se usa associate
+        $user->save();
+
+        return redirect()->route('user.edit', $id);
     }
 
     /**

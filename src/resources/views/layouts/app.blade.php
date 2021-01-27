@@ -34,13 +34,13 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link {{Request::is('proyectos') ? 'active' : ''}}" href="{{route('proyectos.index')}}">Proyectos</a>
+                            <a class="nav-link {{Request::is('proyectos*') ? 'active' : ''}}" href="{{route('proyectos.index')}}">Proyectos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{Request::is('dgs') ? 'active' : ''}}" href="{{route('dg.index')}}">Direcciones Generales</a>
+                            <a class="nav-link {{Request::is('dgs*') ? 'active' : ''}}" href="{{route('dg.index')}}">Direcciones Generales</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{Request::is('perfiles') ? 'active' : ''}}" href="{{route('perfil.index')}}">Perfiles</a>
+                            <a class="nav-link {{Request::is('perfiles*') ? 'active' : ''}}" href="{{route('perfil.index')}}">Perfiles</a>
                         </li>
                     </ul>
 
@@ -68,6 +68,9 @@
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('user.edit', Auth::user()->id)}}">
+                                        Editar
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

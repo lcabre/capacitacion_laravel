@@ -17,6 +17,7 @@ class ProyectosController extends Controller
     public function index()
     {
         $proyectos = Proyecto::with('users')->paginate(5);
+        //$proyectos = Proyecto::withCount('users')->paginate(5); //Trae solo los integrantes
         return view('pages.proyectos.index', compact('proyectos'));
     }
 
@@ -41,7 +42,7 @@ class ProyectosController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nombre' => 'required|string|max:255',
-            'fecha_entrega' => 'required',
+            'fecha_entrega' => 'required|date',
             'integrates' => 'requiered|exists:users,id'
         ]);
 
@@ -70,7 +71,7 @@ class ProyectosController extends Controller
     public function show($id)
     {
         $proyecto = Proyecto::findOrFail($id);
-        $usuarios = $proyecto->users;
+        $usuarios = User::all();
 
         return view('pages.proyectos.show', compact('proyecto', 'usuarios'));
     }

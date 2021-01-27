@@ -6,7 +6,8 @@
             <div class="col-md-12">
                 <a href="{{route('dg.create')}}" class="btn btn-primary" role="button">Crear nueva DG</a>
                 <br>
-                <table class="table table-striped"><thead>
+                <br>
+                <table class="table table-striped text-center"><thead>
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Nombre</th>

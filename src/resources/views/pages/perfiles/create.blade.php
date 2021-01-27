@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="container">
+        <h3 class="text-center">Crear Perfil</h3>
         <div class="row justify-content-center">
             <div class="col-md-4">
                 <div class="container-sm">

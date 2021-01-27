@@ -91,8 +91,8 @@ class PerfilController extends Controller
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'nombre' => 'required',
-            'apellido' => 'required'
+            'nombre' => 'required|string|max:255',
+            'apellido' => 'required|string|max:255'
         ]);
 
         if ($validator->fails()) {

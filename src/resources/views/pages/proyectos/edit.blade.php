@@ -4,6 +4,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-4">
+                <h3 class="text-center">Editar Proyecto</h3>
                 <div class="container-sm">
                     <form action="{{ route('proyectos.update', $proyecto->id)}}" method="post">
                         @csrf
@@ -27,7 +28,7 @@
                             <select multiple class="form-control @error('integrantes[]') is-invalid @enderror" name="integrantes[]" aria-label="Integrantes">
                                 <option value="">Seleccione una opcion</option>
                                 @foreach($usuarios as $usuario)
-                                    <option value="{{$usuario->id}}">{{$usuario->name}}</option>
+                                    <option value="{{$usuario->id}}" {{$proyecto->users->where('id',$usuario->id)->count() ? 'selected' : ''}}>{{$usuario->name}}</option>
                                 @endforeach
                             </select>
                             @error('integrantes[]')

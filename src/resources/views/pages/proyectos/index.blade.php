@@ -6,7 +6,8 @@
             <div class="col-md-12">
                 <a href="{{route('proyectos.create')}}" class="btn btn-primary" role="button">Crear nuevo proyecto</a>
                 <br>
-                <table class="table table-striped"><thead>
+                <br>
+                <table class="table table-striped text-center"><thead>
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Nombre</th>
@@ -24,7 +25,7 @@
                             <td>{{$proyecto->nombre}}</td>
                             <td>{{$proyecto->fecha_entrega}}</td>
                             <td>{{$proyecto->users->implode('name', ', ')}}</td>
-                            <td></td>
+                            <td>{{$proyecto->users->count()}}</td>
                             <td>
                                 <div class="btn-group">
                                     <a href="{{route('proyectos.edit', $proyecto->id)}}" class="btn btn-outline-primary btn-sm">Editar</a>

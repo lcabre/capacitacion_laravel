@@ -6,7 +6,8 @@
             <div class="col-md-12">
                 <a href="{{route('perfil.create')}}" class="btn btn-primary" role="button">Crear nuevo Perfil</a>
                 <br>
-                <table class="table table-striped"><thead>
+                <br>
+                <table class="table table-striped text-center"><thead>
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Nombre</th>
@@ -17,7 +18,7 @@
                     <tbody>
                     @foreach($perfiles as $perfil)
                         <tr>
-                            <th scope="row">{{$perfil->id}}</th>
+                            <td>{{$perfil->id}}</td>
                             <td>{{$perfil->nombre}}</td>
                             <td>{{$perfil->apellido}}</td>
                             <td>

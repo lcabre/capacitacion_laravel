@@ -2,6 +2,9 @@
 
 namespace App;
 
+use App\Models\Dg;
+use App\Models\Perfil;
+use App\Models\Proyecto;
 use App\Models\Role;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;

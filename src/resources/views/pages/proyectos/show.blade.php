@@ -18,7 +18,7 @@
                             <label for="integrantes">Integrantes</label>
                             <select multiple class="form-control" name="integrantes[]" aria-label="Integrantes" disabled>
                                 @foreach($usuarios as $usuario)
-                                    <option value="{{$usuario->id}}">{{$usuario->name}}</option>
+                                    <option value="{{$usuario->id}}" {{$proyecto->users->where('id',$usuario->id)->count() ? 'selected' : ''}}>{{$usuario->name}}</option>
                                 @endforeach
                             </select>
                         </div>

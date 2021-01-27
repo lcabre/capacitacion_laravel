@@ -19,7 +19,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-//PERFILES
+Route::get('user/{id}', 'UserController@edit')->name('user.edit');
+Route::put('users/{id}', 'UserController@update')->name('user.update');
+
+//Perfiles
 Route::get('/perfiles', 'PerfilController@index')->name('perfil.index');
 Route::get('/perfil/create','PerfilController@create')->name('perfil.create');
 Route::post('/perfil', 'PerfilController@store')->name('perfil.store');

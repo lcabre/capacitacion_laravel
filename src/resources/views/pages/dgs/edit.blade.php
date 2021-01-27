@@ -4,6 +4,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-4">
+                <h3 class="text-center">Editar DG</h3>
                 <div class="container-sm">
                     <form action="{{ route('dg.update', $dg->id)}}" method="post">
                         @csrf
