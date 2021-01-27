@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Validator;
 
 class DgController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -52,7 +57,7 @@ class DgController extends Controller
         $dg->nombre = $request->nombre;
         $dg->save();
 
-        return redirect()->route('dg.index');
+        return redirect()->route('dgs.index');
     }
 
     /**
@@ -103,7 +108,7 @@ class DgController extends Controller
         $dg->nombre = $request->nombre;
         $dg->save();
 
-        return redirect()->route('dg.index');
+        return redirect()->route('dgs.index');
     }
 
     /**
@@ -114,6 +119,7 @@ class DgController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Dg::destroy($id);
+        return redirect()->route('dgs.index');
     }
 }

@@ -14,7 +14,7 @@
                             <label for="apellido">Apellido</label>
                             <input name="apellido" type="text" class="form-control" id="apellido" value="{{$perfil->apellido}}" disabled>
                         </div>
-                        <a href="{{route('perfil.edit', $perfil->id)}}" class="btn btn-primary" role="button">Editar</a>
+                        <a href="{{route('perfiles.edit', $perfil->id)}}" class="btn btn-primary" role="button">Editar</a>
                     </form>
                 </div>
             </div>

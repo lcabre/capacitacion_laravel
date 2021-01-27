@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Validator;
 
 class ProyectosController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -43,7 +48,7 @@ class ProyectosController extends Controller
         $validator = Validator::make($request->all(), [
             'nombre' => 'required|string|max:255',
             'fecha_entrega' => 'required|date',
-            'integrates' => 'requiered|exists:users,id'
+            'integrantes' => 'required|exists:users,id'
         ]);
 
         if ($validator->fails()) {
@@ -101,7 +106,7 @@ class ProyectosController extends Controller
         $validator = Validator::make($request->all(), [
             'nombre' => 'required|string|max:255',
             'fecha_entrega' => 'required',
-            'integrates' => 'requiered|exists:users,id'
+            'integrantes' => 'required|exists:users,id'
         ]);
 
         if ($validator->fails()) {
@@ -128,6 +133,10 @@ class ProyectosController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        $proyecto = Proyecto::findOrFail($id);
+        $proyecto->users()->detach();
+        $proyecto->delete();
+        return redirect()->route('proyectos.index');
     }
 }

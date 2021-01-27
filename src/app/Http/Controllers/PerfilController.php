@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Validator;
 
 class PerfilController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -54,7 +58,7 @@ class PerfilController extends Controller
         $perfil->apellido = $request->apellido;
         $perfil->save();
 
-        return redirect()->route('perfil.index');
+        return redirect()->route('perfiles.index');
     }
 
     /**
@@ -107,7 +111,7 @@ class PerfilController extends Controller
         $perfil->apellido = $request->apellido;
         $perfil->save();
 
-        return redirect()->route('perfil.show', $id);
+        return redirect()->route('perfiles.show', $id);
     }
 
     /**
@@ -116,8 +120,4 @@ class PerfilController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
-    }
 }

@@ -30,7 +30,11 @@
                                 <div class="btn-group">
                                     <a href="{{route('proyectos.edit', $proyecto->id)}}" class="btn btn-outline-primary btn-sm">Editar</a>
                                     <a href="{{route('proyectos.show', $proyecto->id)}}" class="btn btn-outline-info btn-sm">Info</a>
-                                    <a href="#" class="btn btn-outline-danger btn-sm">Eliminar</a>
+                                    <form action="{{route('proyectos.destroy', $proyecto->id)}}" method="POST" class="btn-group">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-outline-danger btn-sm">Eliminar</button>
+                                    </form>
                                 </div>
                             </td>
                         </tr>

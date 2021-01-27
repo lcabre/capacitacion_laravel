@@ -10,7 +10,7 @@
                             <label for="nombre">Nombre</label>
                             <input name="nombre" type="text" class="form-control" id="nombre" value="{{$dg->nombre}}" disabled>
                         </div>
-                        <a href="{{route('dg.edit', $dg->id)}}" class="btn btn-primary" role="button">Editar</a>
+                        <a href="{{route('dgs.edit', $dg->id)}}" class="btn btn-primary" role="button">Editar</a>
                     </form>
                 </div>
             </div>

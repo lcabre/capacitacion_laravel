@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <a href="{{route('dg.create')}}" class="btn btn-primary" role="button">Crear nueva DG</a>
+                <a href="{{route('dgs.create')}}" class="btn btn-primary" role="button">Crear nueva DG</a>
                 <br>
                 <br>
                 <table class="table table-striped text-center"><thead>
@@ -22,9 +22,13 @@
                             <td>{{$dg->nombre}}</td>
                             <td>
                                 <div class="btn-group">
-                                    <a href="{{route('dg.edit', $dg->id)}}" class="btn btn-outline-primary btn-sm">Editar</a>
-                                    <a href="{{route('dg.show', $dg->id)}}" class="btn btn-outline-info btn-sm">Info</a>
-                                    <a href="#" class="btn btn-outline-danger btn-sm">Eliminar</a>
+                                    <a href="{{route('dgs.edit', $dg->id)}}" class="btn btn-outline-primary btn-sm">Editar</a>
+                                    <a href="{{route('dgs.show', $dg->id)}}" class="btn btn-outline-info btn-sm">Info</a>
+                                    <form action="{{route('dgs.destroy', $dg->id)}}" method="POST" class="btn-group">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-outline-danger btn-sm">Eliminar</button>
+                                    </form>
                                 </div>
                             </td>
                         </tr>
