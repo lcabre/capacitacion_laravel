@@ -10,7 +10,7 @@
                         @csrf
                         <div class="form-group">
                             <label for="nombre">Nombre</label>
-                            <input name="nombre" type="text" class="form-control @error('nombre') is-invalid @enderror" placeholder="DG de Opinion Publica" aria-label="Nombre de la DG">
+                            <input value="{{old('nombre')}}" name="nombre" type="text" class="form-control @error('nombre') is-invalid @enderror" placeholder="DG de Opinion Publica" aria-label="Nombre de la DG">
                             @error('nombre')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror

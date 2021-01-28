@@ -22,9 +22,10 @@
                             <td>{{$perfil->nombre}}</td>
                             <td>{{$perfil->apellido}}</td>
                             <td>
-                                <div class="btn-group">
-                                    <a href="{{route('perfiles.edit', $perfil->id)}}" class="btn btn-outline-primary btn-sm">Editar</a>
-                                    <a href="{{route('perfiles.show', $perfil->id)}}" class="btn btn-outline-info btn-sm">Info</a>
+                                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Acciones</button>
+                                <div class="dropdown-menu">
+                                    <a href="{{route('perfiles.edit', $perfil->id)}}" class="dropdown-item">Editar</a>
+                                    <a href="{{route('perfiles.show', $perfil->id)}}" class="dropdown-item">Informacion</a>
                                 </div>
                             </td>
                         </tr>

@@ -18,9 +18,10 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
+Route::resource('home', 'HomeController')->only(['index']);
 Route::resource('users', 'UserController')->only(['update', 'edit']);
-
+Route::resource('proyectos', 'ProyectosController');
+Route::resource('dgs', 'DgController');
 Route::resource('perfiles', 'PerfilController')->except('destroy');
 //Route::get('/perfiles', 'PerfilController@index')->name('perfil.index');
 //Route::get('/perfil/create','PerfilController@create')->name('perfil.create');
@@ -29,8 +30,6 @@ Route::resource('perfiles', 'PerfilController')->except('destroy');
 //Route::get('/perfil/{id}/edit', 'PerfilController@edit')->name('perfil.edit');
 //Route::put('/perfil/{id}','PerfilController@update')->name('perfil.update');
 
-Route::resource('proyectos', 'ProyectosController');
-Route::resource('dgs', 'DgController');
 
 
 
@@ -38,8 +37,7 @@ Route::resource('dgs', 'DgController');
 
 
 
-
-//Route::get('/home', 'HomeController@index')->name('home');->middleware('role:admin')
+//Route::get('/home', 'HomeController@index')->name('home')->middleware('role:admin');
 //Route::resource('roles','RoleController');
 //Route::post('users/attach','RoleController@attachRole')->name('users.attachrole');
 

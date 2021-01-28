@@ -21,13 +21,15 @@
                             <td>{{$dg->id}}</td>
                             <td>{{$dg->nombre}}</td>
                             <td>
-                                <div class="btn-group">
-                                    <a href="{{route('dgs.edit', $dg->id)}}" class="btn btn-outline-primary btn-sm">Editar</a>
-                                    <a href="{{route('dgs.show', $dg->id)}}" class="btn btn-outline-info btn-sm">Info</a>
-                                    <form action="{{route('dgs.destroy', $dg->id)}}" method="POST" class="btn-group">
+                                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Acciones</button>
+                                <div class="dropdown-menu">
+                                    <a href="{{route('dgs.edit', $dg->id)}}" class="dropdown-item">Editar</a>
+                                    <a href="{{route('dgs.show', $dg->id)}}" class="dropdown-item">Informacion</a>
+                                    <div role="separator" class="dropdown-divider"></div>
+                                    <form action="{{route('dgs.destroy', $dg->id)}}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-outline-danger btn-sm">Eliminar</button>
+                                        <button type="submit" class="dropdown-item ">Eliminar</button>
                                     </form>
                                 </div>
                             </td>

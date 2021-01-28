@@ -27,13 +27,15 @@
                             <td>{{$proyecto->users->implode('name', ', ')}}</td>
                             <td>{{$proyecto->users->count()}}</td>
                             <td>
-                                <div class="btn-group">
-                                    <a href="{{route('proyectos.edit', $proyecto->id)}}" class="btn btn-outline-primary btn-sm">Editar</a>
-                                    <a href="{{route('proyectos.show', $proyecto->id)}}" class="btn btn-outline-info btn-sm">Info</a>
+                                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Acciones</button>
+                                <div class="dropdown-menu">
+                                    <a href="{{route('proyectos.edit', $proyecto->id)}}" class="dropdown-item">Editar</a>
+                                    <a href="{{route('proyectos.show', $proyecto->id)}}" class="dropdown-item">Informacion</a>
+                                    <div role="separator" class="dropdown-divider"></div>
                                     <form action="{{route('proyectos.destroy', $proyecto->id)}}" method="POST" class="btn-group">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-outline-danger btn-sm">Eliminar</button>
+                                        <button type="submit" class="dropdown-item">Eliminar</button>
                                     </form>
                                 </div>
                             </td>

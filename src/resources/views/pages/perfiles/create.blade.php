@@ -10,14 +10,14 @@
                         @csrf
                         <div class="form-group">
                             <label for="nombre">Nombre</label>
-                            <input name="nombre" type="text" class="form-control @error('nombre') is-invalid @enderror" id="nombre" placeholder="Jane">
+                            <input value="{{old('nombre')}}" name="nombre" type="text" class="form-control @error('nombre') is-invalid @enderror" id="nombre" placeholder="Jane">
                             @error('nombre')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-group">
                             <label for="apellido">Apellido</label>
-                            <input name="apellido" type="text" class="form-control @error('apellido') is-invalid @enderror" id="apellido" placeholder="Doe" ">
+                            <input value="{{old('apellido')}}" name="apellido" type="text" class="form-control @error('apellido') is-invalid @enderror" id="apellido" placeholder="Doe" ">
                             @error('apellido')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror

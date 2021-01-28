@@ -14,6 +14,7 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('user');
     }
 
     /**
@@ -110,7 +111,7 @@ class UserController extends Controller
         $user->dg()->associate($dg); //Cuando es 1 a N, se usa associate
         $user->save();
 
-        return redirect()->route('user.edit', $id);
+        return redirect()->route('users.edit', $id);
     }
 
 }
