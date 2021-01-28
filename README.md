@@ -15,3 +15,9 @@
 Si quieren borrar todas las tablas de la base y volver a crearlas y seedearlas
 
 `docker-compose exec php php artisan migrate:refresh --seed`
+
+`docker-compose run --rm composer dump-autoload`
+
+`docker-compose exec php php artisan route:list`
+
+

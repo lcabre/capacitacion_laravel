@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Project;
 use App\Models\Role;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -58,7 +61,9 @@ class UserController extends Controller
 
         $roles = Role::all();
 
-        return view('pages.users.show', compact('user', 'roles'));
+        $projects = Project::all();
+
+        return view('pages.users.show', compact('user', 'roles', 'projects'));
     }
 
     /**
@@ -69,7 +74,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        //aca tiene que llegar todos los projectos asociados, su role y su perfil
     }
 
     /**
@@ -93,5 +98,43 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function attachProject(Request $request){
+        return 'hola';
+        //dd($request->all());
+
+        $user = Auth::user();
+        //dd($id);
+        //dd($request);
+        //dd($request->all()['carlist']);
+        //dd($request->all());
+        //dd($request->all());
+        $validator = Validator::make($request->all(), [
+            'projects.*' => 'required|numeric|exists:projects,id',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()
+                ->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+        //dd($validator->fails());
+        //$user = User::find($id);
+        $projects = Project::find($request->projects);
+        //ddd($projects);
+
+//        $project->nombre = 'sadasdas';
+//        $project->save();
+        //$project = new Project();
+        //$project->delete();
+        //ELIMINAR TODOS LOS USER_PROJECTS DEL USER
+        $projectsValid = Project::all();
+        $user->projects()->detach($projectsValid);
+        $user->projects()->attach($projects);
+        $user->save();
+
+        return redirect()->route('home');
     }
 }
