@@ -11,6 +11,7 @@ class PerfilController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('perfil', ['only' => ['edit', 'update']]);
     }
     /**
      * Display a listing of the resource.
