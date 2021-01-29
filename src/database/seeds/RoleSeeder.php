@@ -17,6 +17,12 @@ class RoleSeeder extends Seeder
                 'slug' => 'admin',
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
+            ),
+            array(
+                'nombre' => 'Base',
+                'slug' => 'base',
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
             )
         ]);
     }
