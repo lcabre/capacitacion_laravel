@@ -38,6 +38,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function profile(){
+        return $this->belongsToMany(Role::class, 'user_profile','user_id');
+    }
+
     public function projects(){
         return $this->belongsToMany(Role::class, 'user_project','user_id', 'project_id');
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Profile;
 use App\Models\Project;
 use App\Models\Role;
 use App\User;
@@ -19,7 +20,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::all(); //Eloquent
+
+        return view('pages.users.index', compact('users'));
     }
 
     /**
@@ -52,18 +55,22 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::findOrFail($id); //Eloquent
-//        $user2 = DB::table('users')
-//            ->selectRaw('count(*) as user')
-//            ->groupBy('id')
-//            ->get();//query builder
+        $profile = Profile::where('user_id',$id)->first();
+        $profile = ($profile) ? $profile : new Profile();
 
-//        dd($user);
+        $roles = Role::select('roles.nombre','roles.id', 'user_role.user_id')
+            ->leftjoin('user_role',function ($join) use ($id){
+                $join->on('roles.id', '=', 'user_role.role_id')
+                    ->where('user_role.user_id', $id);
+            })->get();
 
-        $roles = Role::all();
+        $projects = Project::select('projects.nombre','projects.id', 'user_project.user_id')
+            ->leftjoin('user_project',function ($join) use ($id){
+                $join->on('projects.id', '=', 'user_project.project_id')
+                    ->where('user_project.user_id', $id);
+            })->get();
 
-        $projects = Project::all();
-
-        return view('pages.users.show', compact('user', 'roles', 'projects'));
+        return view('pages.users.show', compact('user', 'roles', 'projects', 'profile'));
     }
 
     /**
@@ -86,7 +93,33 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $validator = Validator::make($request->all(), [
+            'projects.*' => 'required|numeric|exists:projects,id',
+            'roles.*' => 'required|numeric|exists:roles,id',
+            'name' => 'required|string',
+            'lastname' => 'required|string',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()
+                ->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $profile = Profile::where('user_id',$id)->count() > 0 ? Profile::where('user_id',$id)->first() : new Profile();
+        $profile->user_id = $id;
+        $profile->name = $request->name;
+        $profile->lastname = $request->lastname;
+
+        $profile->save();
+
+        $user->roles()->sync($request->roles);
+        $user->projects()->sync($request->projects);
+        $user->save();
+
+        return redirect()->route('home');
     }
 
     /**
@@ -101,40 +134,6 @@ class UserController extends Controller
     }
 
     public function attachProject(Request $request){
-        return 'hola';
-        //dd($request->all());
-
-        $user = Auth::user();
-        //dd($id);
-        //dd($request);
-        //dd($request->all()['carlist']);
-        //dd($request->all());
-        //dd($request->all());
-        $validator = Validator::make($request->all(), [
-            'projects.*' => 'required|numeric|exists:projects,id',
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()
-                ->back()
-                ->withErrors($validator)
-                ->withInput();
-        }
-        //dd($validator->fails());
-        //$user = User::find($id);
-        $projects = Project::find($request->projects);
-        //ddd($projects);
-
-//        $project->nombre = 'sadasdas';
-//        $project->save();
-        //$project = new Project();
-        //$project->delete();
-        //ELIMINAR TODOS LOS USER_PROJECTS DEL USER
-        $projectsValid = Project::all();
-        $user->projects()->detach($projectsValid);
-        $user->projects()->attach($projects);
-        $user->save();
-
         return redirect()->route('home');
     }
 }

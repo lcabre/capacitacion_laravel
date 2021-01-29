@@ -10,7 +10,7 @@ class Project extends Model
     protected $table = 'projects';
 
     public function projects(){
-        return $this->belongsToMany(Project::class, 'projects');
+        return $this->belongsToMany(Project::class, 'user_project');
     }
 
     public function users(){

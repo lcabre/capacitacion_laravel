@@ -19,26 +19,10 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        //$projects = Project::all();
         //eloquent
-        $projects = Project::select('id','nombre')->get();
-        //dd($projects->first()->nombre);
-        //dd($projects->toArray());
-        /*
-        $projects = DB::table('projects')
-            ->select('id AS project_id', 'nombre')
-            ->get();
-        */
-        //dd($projects[0]->name);
-        $pp2 = ['testeando', 'testeando2', 'testeando3'];
-        $pp = 'testeando';
-        //dd($pp);
+        $projects = Project::all();
         //https://laravel.com/docs/8.x/views
-
-        return view('project')
-            ->with('name', 'Victoria')
-            ->with('occupations', $pp2)
-            ->with('projects', $projects);
+        return view('pages.projects.index', compact('projects'));
     }
 
     /**
@@ -48,7 +32,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.projects.store');
     }
 
     /**
@@ -59,15 +43,26 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        /*
-        ddd($request);
-        $input = $request->all();
-        $input['project'] = bcrypt($input['project']);
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string',
+            'date' => 'required|date',
+        ]);
 
-        dd($input['project']);
-        //
+        if ($validator->fails()) {
+            return redirect()
+                ->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $projects = new Project();
+
+        $projects->nombre =  $request->name;
+        $projects->fecha_entrega = $request->date;
+
+        $projects->save();
+
         return redirect()->route('home');
-        */
     }
 
     /**
@@ -123,34 +118,6 @@ class ProjectController extends Controller
 
 
     public function attachProject(Request $request){
-        $user = Auth::user();
-        //dd($id);
-        //dd($request);
-        //dd($request->all()['carlist']);
-        //dd($request->all());
-        $validator = Validator::make($request->all(), [
-            'id' => 'required|numeric|exists:projects,id',
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()
-                ->back()
-                ->withErrors($validator)
-                ->withInput();
-        }
-
-        //$user = User::find($id);
-        $project = Project::find($request->id);
-
-
-//        $project->nombre = 'sadasdas';
-//        $project->save();
-        $project = new Project();
-        $project->delete();
-
-
-        $user->projects()->attach($project);
-        $user->save();
 
         return redirect()->route('home');
     }
