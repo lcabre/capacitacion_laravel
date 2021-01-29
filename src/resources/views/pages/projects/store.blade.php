@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container pepe">
-        <div class="row justify-content-center">
+        <div class="container p-3 my-3 border">
             <form action="{{ route('projects.store' ) }}" method="POST">
                 @csrf
                 <div class="card">
