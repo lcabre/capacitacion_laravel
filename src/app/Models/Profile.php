@@ -9,11 +9,7 @@ class Profile extends Model
 {
     protected $table = 'user_profile';
 
-    public function profiles(){
-        return $this->belongsToMany(Profile::class, 'user_profile','user_id');
-    }
-
-    public function users(){
-        return $this->belongsToMany(User::class, 'user_profile','user_id');
+    public function user(){
+        return $this->belongsTo(User::class,'user_id');
     }
 }

@@ -9,10 +9,6 @@ class Project extends Model
 {
     protected $table = 'projects';
 
-    public function projects(){
-        return $this->belongsToMany(Project::class, 'user_project');
-    }
-
     public function users(){
         return $this->belongsToMany(User::class, 'user_project','project_id', 'user_id');
     }

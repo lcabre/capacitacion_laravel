@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Models\Profile;
+use App\Models\Project;
 use App\Models\Role;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -39,11 +41,11 @@ class User extends Authenticatable
     ];
 
     public function profile(){
-        return $this->belongsToMany(Role::class, 'user_profile','user_id');
+        return $this->hasOne(Profile::class, 'user_id');
     }
 
     public function projects(){
-        return $this->belongsToMany(Role::class, 'user_project','user_id', 'project_id');
+        return $this->belongsToMany(Project::class, 'user_project','user_id', 'project_id');
     }
 
     public function roles(){
