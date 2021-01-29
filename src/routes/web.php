@@ -20,9 +20,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home')/*->middleware('role:admin')*/;
-Route::resource('users','UserController');
-Route::resource('roles','RoleController');
-Route::resource('projects','ProjectController');
+Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');/*->middleware('role:admin');*/
+Route::resource('users','UserController')->middleware('auth');
+Route::resource('roles','RoleController')->middleware('auth');
+Route::resource('projects','ProjectController')->middleware('auth');
 
 
