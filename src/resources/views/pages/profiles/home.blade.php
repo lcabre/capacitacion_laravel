@@ -9,7 +9,7 @@
             </div>
 
             <div name="update-user">
-                <form action="{{ route('profile.update',$user->id) }}" method="post">
+                <form action="{{ route('profile.update',auth()->user()->id) }}" method="post">
                     @csrf
                     @method('PUT')
                     <div class="form-group">

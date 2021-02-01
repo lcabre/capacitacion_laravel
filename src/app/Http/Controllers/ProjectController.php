@@ -4,10 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Project;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class ProjectController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+//        $this->middleware(['pepe' => ['only' => ['edit','update']]]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,13 +22,11 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        //$project = Project::get();
-        $project = \DB::table('project')->get();
+        $projects = Project::all();
+
     //  $projectId = \DB::table('project')->select('id')->get();
 
-        return view("pages.projects.home", [
-            'projects' => $project
-        ]);
+        return view("pages.projects.home", compact('projects'));
     }
 
     /**
@@ -43,7 +48,7 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|unique:project,name|max:220',
+            'name' => 'required|unique:project,name|max:255',
             'deadline' => 'required|date',
             //'members' => 'required|exists:users,id'
         ]);
@@ -108,7 +113,9 @@ class ProjectController extends Controller
     public function destroy($id)
     {
         $project = Project::findOrFail($id);
+//        $project->users()->detach(); //antes de borrar desasociar los usuarios sino mysql tira error por las FK
         $project->delete();
+
         return redirect()->route('project.index');
     }
 }

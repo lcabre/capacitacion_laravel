@@ -17,11 +17,10 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        $user = Auth::user(); //
+        $user = Auth::user(); //tambien puede ser auth()->user() derecho en la vista
         $project = Project::all();
         return view('pages.profiles.home', compact('user', 'project'));
-
-
+        
     }
 
     /**

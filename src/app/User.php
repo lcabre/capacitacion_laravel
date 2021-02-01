@@ -50,8 +50,8 @@ class User extends Authenticatable
         return $this->hasOne(Profile::class, 'user_id');
     }
 
-    public function project(){
-        return $this_>belongsToMany(Project::class, 'user_project', 'user_id', 'project_id');
+    public function projects(){
+        return $this->belongsToMany(Project::class, 'user_project', 'user_id', 'project_id');
     }
 
 
