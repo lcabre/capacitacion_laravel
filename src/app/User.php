@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Profile;
 use App\Models\Role;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -44,5 +45,9 @@ class User extends Authenticatable
 
     public function checkRole($roles){
         return $this->roles()->whereIn('slug', $roles)->count();
+    }
+
+    public function profile(){
+        return $this->hasOne(Profile::class,'user_id');
     }
 }
