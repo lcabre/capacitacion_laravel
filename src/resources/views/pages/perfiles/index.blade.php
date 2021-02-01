@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <a href="{{route('perfiles.create')}}" class="btn btn-primary" role="button">Crear nuevo Perfil</a>
+{{--                <a href="{{route('perfiles.create')}}" class="btn btn-primary" role="button">Crear nuevo Perfil</a>--}}
                 <br>
                 <br>
                 <table class="table table-striped text-center"><thead>

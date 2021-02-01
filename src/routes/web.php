@@ -22,7 +22,7 @@ Route::resource('home', 'HomeController')->only(['index']);
 Route::resource('users', 'UserController')->only(['update', 'edit']);
 Route::resource('proyectos', 'ProyectosController');
 Route::resource('dgs', 'DgController');
-Route::resource('perfiles', 'PerfilController')->except('destroy');
+Route::resource('perfiles', 'PerfilController')->except(['destroy', 'create', 'store']);
 //Route::get('/perfiles', 'PerfilController@index')->name('perfil.index');
 //Route::get('/perfil/create','PerfilController@create')->name('perfil.create');
 //Route::post('/perfil', 'PerfilController@store')->name('perfil.store');

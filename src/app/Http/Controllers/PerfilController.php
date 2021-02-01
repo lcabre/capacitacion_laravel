@@ -29,10 +29,10 @@ class PerfilController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        return view('pages.perfiles.create');
-    }
+//    public function create()
+//    {
+//        return view('pages.perfiles.create');
+//    }
 
     /**
      * Store a newly created resource in storage.
@@ -40,27 +40,27 @@ class PerfilController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'nombre' => 'required|string|max:255',
-            'apellido' => 'required|string|max:255'
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()
-                ->back()
-                ->withErrors($validator)
-                ->withInput();
-        }
-
-        $perfil = new Perfil();
-        $perfil->nombre = $request->nombre;
-        $perfil->apellido = $request->apellido;
-        $perfil->save();
-
-        return redirect()->route('perfiles.index');
-    }
+//    public function store(Request $request)
+//    {
+//        $validator = Validator::make($request->all(), [
+//            'nombre' => 'required|string|max:255',
+//            'apellido' => 'required|string|max:255'
+//        ]);
+//
+//        if ($validator->fails()) {
+//            return redirect()
+//                ->back()
+//                ->withErrors($validator)
+//                ->withInput();
+//        }
+//
+//        $perfil = new Perfil();
+//        $perfil->nombre = $request->nombre;
+//        $perfil->apellido = $request->apellido;
+//        $perfil->save();
+//
+//        return redirect()->route('perfiles.index');
+//    }
 
     /**
      * Display the specified resource.
