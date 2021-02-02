@@ -12,4 +12,9 @@ class EventController extends Controller
 //        TestEvent::dispatch("hola");
         event(new TestEvent("hola"));
     }
+
+    public function ajaxcall(Request $request){
+//        dd($request->all());
+        return response()->json(["success"=> false], 400);
+    }
 }

@@ -1,4 +1,5 @@
 const mix = require('laravel-mix');
+const glob = require('glob');
 
 /*
  |--------------------------------------------------------------------------
@@ -13,3 +14,14 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css');
+
+(glob.sync('resources/sass/pages/**/*.scss') || []).forEach(file => {
+    file = file.replace(/[\\\/]+/g, '/');
+    mix.sass(file, file.replace('resources/sass', 'public/css').replace(/\.scss$/, '.css'));
+});
+
+(glob.sync('resources/js/pages/**/*.js') || []).forEach(file => {
+    mix.js(file, `public/${file.replace('resources/', '')}`);
+});
+
+mix.version();
