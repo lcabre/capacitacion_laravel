@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dg;
+use App\DataTables\UsersDataTable;
 use App\Models\Role;
 use App\User;
 use Illuminate\Http\Request;
@@ -22,9 +23,12 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(UsersDataTable $dataTable)
     {
-        //
+//        $users = User::with('profile')->get();
+//        return view('pages.users.index', compact('users'));
+
+        return $dataTable->render('pages.users.index');
     }
 
     /**
@@ -105,5 +109,16 @@ class UserController extends Controller
 
         return redirect()->route('users.edit', $id);
     }
+  /**
+   * Remove the specified resource from storage.
+   *
+   * @param  int  $id
+   * @return \Illuminate\Http\Response
+   */
+  public function destroy($id)
+  {
+    User::destroy($id);
 
+    return response()->json(['message' => 'deleted']);
+  }
 }

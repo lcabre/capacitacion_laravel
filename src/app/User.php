@@ -56,6 +56,6 @@ class User extends Authenticatable
         return $this->belongsToMany(Proyect::class, 'user_proyect','user_id', 'proyect_id');
     }
     public function profile(){
-        return $this->hasOne(Profile::class);
+        return $this->hasOne(Profile::class, 'user_id');
     }
 }
