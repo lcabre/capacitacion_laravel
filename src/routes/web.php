@@ -31,4 +31,8 @@ Route::resource('/profile', 'ProfileController');
 //Route::get('/project/create', function() {
 //    return view('pages.projects.create');
 //});
+Route::post('users/attach','RoleController@attachRole')->name('users.attachrole');
+Route::get('/dispatch', 'EventController@pruebadispatch')->name('event.dispatch');
+Route::post('/ajaxcall', 'EventController@ajaxcall')->name('event.ajaxcall');
+
 
