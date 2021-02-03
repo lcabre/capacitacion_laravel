@@ -16,16 +16,16 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($perfiles as $perfil)
+                    @foreach($profiles as $profile)
                         <tr>
-                            <td>{{$perfil->id}}</td>
-                            <td>{{$perfil->nombre}}</td>
-                            <td>{{$perfil->apellido}}</td>
+                            <td>{{$profile->id}}</td>
+                            <td>{{$profile->nombre}}</td>
+                            <td>{{$profile->apellido}}</td>
                             <td>
                                 <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Acciones</button>
                                 <div class="dropdown-menu">
-                                    <a href="{{route('perfiles.edit', $perfil->id)}}" class="dropdown-item">Editar</a>
-                                    <a href="{{route('perfiles.show', $perfil->id)}}" class="dropdown-item">Informacion</a>
+                                    <a href="{{route('profiles.edit', $profile->id)}}" class="dropdown-item">Editar</a>
+                                    <a href="{{route('profiles.show', $profile->id)}}" class="dropdown-item">Informacion</a>
                                 </div>
                             </td>
                         </tr>

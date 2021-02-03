@@ -3,8 +3,8 @@
 namespace App;
 
 use App\Models\Dg;
-use App\Models\Perfil;
-use App\Models\Proyecto;
+use App\Models\Profile;
+use App\Models\Proyect;
 use App\Models\Role;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -52,10 +52,10 @@ class User extends Authenticatable
     public function dg(){
         return $this->belongsTo(Dg::class, 'dg_id');
     }
-    public function proyecto(){
-        return $this->belongsToMany(Proyecto::class, 'user_proyecto','user_id', 'proyecto_id');
+    public function proyect(){
+        return $this->belongsToMany(Proyect::class, 'user_proyect','user_id', 'proyect_id');
     }
-    public function perfil(){
-        return $this->hasOne(Perfil::class);
+    public function profile(){
+        return $this->hasOne(Profile::class);
     }
 }

@@ -15,7 +15,7 @@ class CheckPerfil
      */
     public function handle($request, Closure $next)
     {
-        if($request->user()->perfil->id == $request->route('perfile')){
+        if($request->user()->profile->id == $request->route('profile')){
             return $next($request);
         }
         abort(401);

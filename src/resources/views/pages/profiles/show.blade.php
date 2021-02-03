@@ -8,13 +8,13 @@
                     <form>
                         <div class="form-group">
                             <label for="nombre">Nombre</label>
-                            <input name="nombre" type="text" class="form-control" id="nombre" value="{{$perfil->nombre}}" disabled>
+                            <input name="nombre" type="text" class="form-control" id="nombre" value="{{$profile->nombre}}" disabled>
                         </div>
                         <div class="form-group">
                             <label for="apellido">Apellido</label>
-                            <input name="apellido" type="text" class="form-control" id="apellido" value="{{$perfil->apellido}}" disabled>
+                            <input name="apellido" type="text" class="form-control" id="apellido" value="{{$profile->apellido}}" disabled>
                         </div>
-                        <a href="{{route('perfiles.edit', $perfil->id)}}" class="btn btn-primary" role="button">Editar</a>
+                        <a href="{{route('profiles.edit', $profile->id)}}" class="btn btn-primary" role="button">Editar</a>
                     </form>
                 </div>
             </div>

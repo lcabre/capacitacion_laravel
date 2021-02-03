@@ -1,18 +1,18 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\Dg;
+use App\Models\Profile;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class DgController extends Controller
+class ProfileController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('perfil', ['only' => ['edit', 'update']]);
     }
-
     /**
      * Display a listing of the resource.
      *
@@ -20,44 +20,8 @@ class DgController extends Controller
      */
     public function index()
     {
-        $dgs = Dg::paginate(5);
-        return view('pages.dgs.index', compact('dgs'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
-     */
-    public function create()
-    {
-        return view('pages.dgs.create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function store(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'nombre' => 'required|string|max:255',
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()
-                ->back()
-                ->withErrors($validator)
-                ->withInput();
-        }
-
-        $dg = new Dg();
-        $dg->nombre = $request->nombre;
-        $dg->save();
-
-        return redirect()->route('dgs.index');
+        $profiles = Profile::paginate(5);
+        return view('pages.profiles.index', compact('profiles'));
     }
 
     /**
@@ -68,8 +32,8 @@ class DgController extends Controller
      */
     public function show($id)
     {
-        $dg = Dg::findOrFail($id);
-        return view('pages.dgs.show', compact('dg'));
+        $profile = Profile::findOrFail($id);
+        return view('pages.profiles.show', compact('profile'));
     }
 
     /**
@@ -80,8 +44,8 @@ class DgController extends Controller
      */
     public function edit($id)
     {
-        $dg = Dg::findOrFail($id);
-        return view('pages.dgs.edit', compact('dg'));
+        $profile = Profile::findOrFail($id);
+        return view('pages.profiles.edit', compact('profile'));
     }
 
     /**
@@ -95,6 +59,7 @@ class DgController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nombre' => 'required|string|max:255',
+            'apellido' => 'required|string|max:255'
         ]);
 
         if ($validator->fails()) {
@@ -104,22 +69,18 @@ class DgController extends Controller
                 ->withInput();
         }
 
-        $dg = DG::find($id);
-        $dg->nombre = $request->nombre;
-        $dg->save();
+        $profile = Profile::find($id);
+        $profile->nombre = $request->nombre;
+        $profile->apellido = $request->apellido;
+        $profile->save();
 
-        return redirect()->route('dgs.index');
+        return redirect()->route('profiles.show', $id);
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        Dg::destroy($id);
-        return redirect()->route('dgs.index');
-    }
 }

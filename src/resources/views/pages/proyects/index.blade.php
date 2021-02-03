@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <a href="{{route('proyectos.create')}}" class="btn btn-primary" role="button">Crear nuevo proyecto</a>
+                <a href="{{route('proyects.create')}}" class="btn btn-primary" role="button">Crear nuevo proyecto</a>
                 <br>
                 <br>
                 <table class="table table-striped text-center"><thead>
@@ -19,20 +19,20 @@
                     </thead>
                     <tbody>
 
-                    @foreach($proyectos as $proyecto)
+                    @foreach($proyects as $proyect)
                         <tr>
-                            <td>{{$proyecto->id}}</td>
-                            <td>{{$proyecto->nombre}}</td>
-                            <td>{{$proyecto->fecha_entrega}}</td>
-                            <td>{{$proyecto->users->implode('name', ', ')}}</td>
-                            <td>{{$proyecto->users->count()}}</td>
+                            <td>{{$proyect->id}}</td>
+                            <td>{{$proyect->nombre}}</td>
+                            <td>{{$proyect->fecha_entrega}}</td>
+                            <td>{{$proyect->users->implode('name', ', ')}}</td>
+                            <td>{{$proyect->users->count()}}</td>
                             <td>
                                 <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Acciones</button>
                                 <div class="dropdown-menu">
-                                    <a href="{{route('proyectos.edit', $proyecto->id)}}" class="dropdown-item">Editar</a>
-                                    <a href="{{route('proyectos.show', $proyecto->id)}}" class="dropdown-item">Informacion</a>
+                                    <a href="{{route('proyects.edit', $proyect->id)}}" class="dropdown-item">Editar</a>
+                                    <a href="{{route('proyects.show', $proyect->id)}}" class="dropdown-item">Informacion</a>
                                     <div role="separator" class="dropdown-divider"></div>
-                                    <form action="{{route('proyectos.destroy', $proyecto->id)}}" method="POST" class="btn-group">
+                                    <form action="{{route('proyects.destroy', $proyect->id)}}" method="POST" class="btn-group">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="dropdown-item">Eliminar</button>
@@ -43,7 +43,7 @@
                     @endforeach
                     </tbody>
                 </table>
-                {{$proyectos->links()}}
+                {{$proyects->links()}}
             </div>
         </div>
     </div>

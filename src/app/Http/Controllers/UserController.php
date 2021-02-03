@@ -52,28 +52,20 @@ class UserController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
      */
     public function show($id)
     {
-        $user = User::findOrFail($id); //Eloquent
-//        $user2 = DB::table('users')
-//            ->selectRaw('count(*) as user')
-//            ->groupBy('id')
-//            ->get();//query builder
+        $user = User::findOrFail($id);
 
-//        dd($user);
-
-        $roles = Role::all();
-
-        return view('pages.users.show', compact('user', 'roles'));
+        return view('pages.users.show', compact('user'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
      */
     public function edit($id)
     {
@@ -87,7 +79,7 @@ class UserController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $id)
     {

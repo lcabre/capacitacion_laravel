@@ -6,7 +6,7 @@
         <div class="row justify-content-center">
             <div class="col-md-4">
                 <div class="container-sm">
-                    <form action="{{ route('proyectos.store')}}" method="post">
+                    <form action="{{ route('proyects.store')}}" method="post">
                         @csrf
                         <div class="form-group">
                             <label for="nombre">Nombre del proyecto</label>
@@ -26,8 +26,8 @@
                             <label for="integrantes">Integrantes</label>
                             <select multiple class="form-control @error('integrantes') is-invalid @enderror" name="integrantes[]" aria-label="Integrantes">
                                 <option value="">Seleccione una opcion</option>
-                                @foreach($usuarios as $usuario)
-                                    <option value="{{$usuario->id}}" {{ old('integrantes') && in_array($usuario->id ,old('integrantes')) ? 'selected' : ''}}>{{$usuario->name}}</option>
+                                @foreach($users as $user)
+                                    <option value="{{$user->id}}" {{ old('integrantes') && in_array($user->id ,old('integrantes')) ? 'selected' : ''}}>{{$user->name}}</option>
                                 @endforeach
                             </select>
                             @error('integrantes')

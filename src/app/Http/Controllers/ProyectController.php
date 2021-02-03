@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Proyecto;
+use App\Models\Proyect;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class ProyectosController extends Controller
+class ProyectController extends Controller
 {
     public function __construct()
     {
@@ -17,31 +17,31 @@ class ProyectosController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
      */
     public function index()
     {
-        $proyectos = Proyecto::with('users')->paginate(5);
+        $proyects = Proyect::with('users')->paginate(5);
         //$proyectos = Proyecto::withCount('users')->paginate(5); //Trae solo los integrantes
-        return view('pages.proyectos.index', compact('proyectos'));
+        return view('pages.proyects.index', compact('proyects'));
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
      */
     public function create()
     {
-        $usuarios = User::all();
-        return view('pages.proyectos.create', compact('usuarios'));
+        $users = User::all();
+        return view('pages.proyects.create', compact('users'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -58,40 +58,40 @@ class ProyectosController extends Controller
                 ->withInput();
         }
 
-        $proyecto = new Proyecto();
-        $proyecto->nombre = $request->nombre;
-        $proyecto->fecha_entrega = $request->fecha_entrega;
-        $proyecto->save();
-        $proyecto->users()->sync($request->integrantes);
+        $proyect = new Proyect();
+        $proyect->nombre = $request->nombre;
+        $proyect->fecha_entrega = $request->fecha_entrega;
+        $proyect->save();
+        $proyect->users()->sync($request->integrantes);
 
-        return redirect()->route('proyectos.index');
+        return redirect()->route('proyects.index');
     }
 
     /**
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
      */
     public function show($id)
     {
-        $proyecto = Proyecto::findOrFail($id);
-        $usuarios = User::all();
+        $proyect = Proyect::findOrFail($id);
+        $users = User::all();
 
-        return view('pages.proyectos.show', compact('proyecto', 'usuarios'));
+        return view('pages.proyects.show', compact('proyect', 'users'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
      */
     public function edit($id)
     {
-        $usuarios = User::all();
-        $proyecto = Proyecto::findOrFail($id);
-        return view('pages.proyectos.edit', compact('proyecto', 'usuarios'));
+        $users = User::all();
+        $proyect = Proyect::findOrFail($id);
+        return view('pages.proyects.edit', compact('proyect', 'users'));
     }
 
     /**
@@ -99,7 +99,7 @@ class ProyectosController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $id)
     {
@@ -116,27 +116,27 @@ class ProyectosController extends Controller
                 ->withInput();
         }
 
-        $proyecto = Proyecto::find($id);
-        $proyecto->nombre = $request->nombre;
-        $proyecto->fecha_entrega = $request->fecha_entrega;
-        $proyecto->save();
-        $proyecto->users()->sync($request->integrantes);
+        $proyect = Proyect::find($id);
+        $proyect->nombre = $request->nombre;
+        $proyect->fecha_entrega = $request->fecha_entrega;
+        $proyect->save();
+        $proyect->users()->sync($request->integrantes);
 
-        return redirect()->route('proyectos.show', $id);
+        return redirect()->route('proyects.show', $id);
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {
 
-        $proyecto = Proyecto::findOrFail($id);
-        $proyecto->users()->detach();
-        $proyecto->delete();
-        return redirect()->route('proyectos.index');
+        $proyect = Proyect::findOrFail($id);
+        $proyect->users()->detach();
+        $proyect->delete();
+        return redirect()->route('proyects.index');
     }
 }

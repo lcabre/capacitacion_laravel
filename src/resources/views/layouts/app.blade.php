@@ -34,13 +34,13 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link {{Request::is('proyectos*') ? 'active' : ''}}" href="{{route('proyectos.index')}}">Proyectos</a>
+                            <a class="nav-link {{Request::is('proyects*') ? 'active' : ''}}" href="{{route('proyects.index')}}">Proyectos</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{Request::is('dgs*') ? 'active' : ''}}" href="{{route('dgs.index')}}">Direcciones Generales</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{Request::is('perfiles*') ? 'active' : ''}}" href="{{route('perfiles.index')}}">Perfiles</a>
+                            <a class="nav-link {{Request::is('profiles*') ? 'active' : ''}}" href="{{route('profiles.index')}}">Perfiles</a>
                         </li>
                     </ul>
 
