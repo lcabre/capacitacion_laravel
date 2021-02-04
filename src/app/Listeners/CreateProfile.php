@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use App\Models\Profile;
+use App\Profile;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 

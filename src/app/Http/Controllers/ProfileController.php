@@ -19,8 +19,8 @@ class ProfileController extends Controller
     {
         $user = Auth::user(); //tambien puede ser auth()->user() derecho en la vista
         $project = Project::all();
-        return view('pages.profiles.home', compact('user', 'project'));
-        
+        $profile = Profile::where('user_id',auth()->user()->id)->first();
+        return view('pages.profiles.home', compact('user', 'project', 'profile'));
     }
 
     /**
@@ -52,7 +52,7 @@ class ProfileController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**

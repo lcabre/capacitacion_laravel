@@ -5,9 +5,9 @@
 use App\Model;
 use Faker\Generator as Faker;
 
-$factory->define(\App\Models\Profile::class, function ($faker) {
+$factory->define(\App\Profile::class, function ($faker) {
     return [
-        'nombre' => $faker->firstName,
-        'apellido' => $faker->lastname,
+        'name' => $faker->firstName,
+        'lastname' => $faker->lastname,
     ];
 });

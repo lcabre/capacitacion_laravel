@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
         factory(User::class, 5000)
             ->create()
             ->each(function ($u) {
-                $u->profile()->save(factory(App\Models\Profile::class)->make());
+                $u->profile()->save(factory(App\Profile::class)->make());
             });;
     }
 }

@@ -15,7 +15,7 @@
                     <div class="form-group">
                         <label for="name">Name</label>
                         <!-- old('name') // ? old('name') : $profile->name -->
-                        <input value="{{old('name')}}" name="name" type="text" class="form-control @error('name') is-invalid @enderror" placeholder="John" aria-label="Name">
+                        <input value="{{old('name') ? old('name') : $profile->name}}" name="name" type="text" class="form-control @error('name') is-invalid @enderror" placeholder="John" aria-label="Name">
                         @error('name')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -23,7 +23,7 @@
                     <div class="form-group">
                         <label for="lastname">Lastname</label>
                         <!-- old('lastname') // ? old('lastname') : $profile->lastname -->
-                        <input value="{{old('lastname')}}" name="lastname" type="text" class="form-control @error('lastname') is-invalid @enderror" placeholder="Cena" aria-label="Lastname">
+                        <input value="{{old('lastname') ? old('lastname') : $profile->lastname}}" name="lastname" type="text" class="form-control @error('lastname') is-invalid @enderror" placeholder="Cena" aria-label="Lastname">
                         @error('lastname')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
