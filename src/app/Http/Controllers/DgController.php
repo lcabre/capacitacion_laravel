@@ -119,7 +119,14 @@ class DgController extends Controller
      */
     public function destroy($id)
     {
+        $dg = Dg::findOrFail($id);
+        $users = $dg->users()->get();
+        foreach($users as $user){
+            $user->dg()->dissociate();
+            $user->save();
+        }
         Dg::destroy($id);
-        return redirect()->route('dgs.index');
+        return response()->json(['message' => 'Deleted']);
+//        return redirect()->route('dgs.index');
     }
 }

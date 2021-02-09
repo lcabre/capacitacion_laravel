@@ -27,9 +27,7 @@
                                     <a href="{{route('dgs.show', $dg->id)}}" class="dropdown-item">Informacion</a>
                                     <div role="separator" class="dropdown-divider"></div>
                                     <form action="{{route('dgs.destroy', $dg->id)}}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="dropdown-item ">Eliminar</button>
+                                        <button type="submit" class="dropdown-item delete">Eliminar</button>
                                     </form>
                                 </div>
                             </td>

@@ -10,6 +10,6 @@ class Dg extends Model
     protected $table = 'dgs';
 
     public function users(){
-        return $this->hasMany(User::Class, 'user_id');
+        return $this->hasMany(User::Class, 'dg_id');
     }
 }
