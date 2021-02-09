@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\ProyectsDataTable;
 use App\Models\Proyect;
 use App\User;
 use Illuminate\Http\Request;
@@ -19,11 +20,9 @@ class ProyectController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
      */
-    public function index()
+    public function index(ProyectsDataTable $dataTable)
     {
-        $proyects = Proyect::with('users')->paginate(5);
-        //$proyectos = Proyecto::withCount('users')->paginate(5); //Trae solo los integrantes
-        return view('pages.proyects.index', compact('proyects'));
+      return $dataTable->render('pages.proyects.index');
     }
 
     /**
@@ -133,10 +132,9 @@ class ProyectController extends Controller
      */
     public function destroy($id)
     {
-
         $proyect = Proyect::findOrFail($id);
         $proyect->users()->detach();
         $proyect->delete();
-        return redirect()->route('proyects.index');
+        return response()->json(['message' => 'Deleted']);
     }
 }

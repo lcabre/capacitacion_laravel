@@ -19,7 +19,7 @@ Route::get('/', function () {
 
 Auth::routes();
 Route::resource('home', 'HomeController')->only(['index']);
-Route::resource('users', 'UserController')->only(['update', 'edit']);
+Route::resource('users', 'UserController')->only(['update', 'edit', 'index']);
 Route::resource('proyects', 'ProyectController');
 Route::resource('dgs', 'DgController');
 Route::resource('profiles', 'ProfileController')->except(['destroy', 'create', 'store']);

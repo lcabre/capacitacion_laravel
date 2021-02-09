@@ -7,15 +7,15 @@
                 <a href="{{route('dgs.create')}}" class="btn btn-primary" role="button">Crear nueva DG</a>
                 <br>
                 <br>
-                <table class="table table-striped text-center"><thead>
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col"></th>
-                    </tr>
+                <table id='dg-table' class="table table-striped text-center">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col"></th>
+                        </tr>
                     </thead>
                     <tbody>
-
                     @foreach($dgs as $dg)
                         <tr>
                             <td>{{$dg->id}}</td>
@@ -42,3 +42,6 @@
         </div>
     </div>
 @endsection
+@push('scripts')
+    <script src="{{ mix('js/pages/dgs/index.js') }}"></script>
+@endpush
